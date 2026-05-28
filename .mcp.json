@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest", "--browser", "chromium"]
+    },
+    "shadcn": {
+      "command": "bash",
+      "args": [
+        "-lc",
+        "cd /home/ubuntu/dev/project/booking-service && exec npx -y shadcn@latest mcp"
+      ]
+    },
+    "stitch": {
+      "command": "bash",
+      "args": [
+        "-lc",
+        "set -a; [ -f /home/ubuntu/dev/project/booking-service/.env ] && . /home/ubuntu/dev/project/booking-service/.env; set +a; exec npx -y mcp-remote https://stitch.googleapis.com/mcp --header \"X-Goog-Api-Key:$STITCH_API_KEY\""
+      ]
+    }
+  }
+}
