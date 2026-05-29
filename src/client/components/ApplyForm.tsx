@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight, CalendarDays, TicketCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -19,6 +19,7 @@ import { services, type ServiceType } from '@/client/data/scheduleSlots'
 import { formatPrice } from '@/client/data/reservations'
 
 export default function ApplyForm() {
+  const navigate = useNavigate()
   const [service, setService] = useState<ServiceType | ''>('')
   const [revealed, setRevealed] = useState(1)
   const [schedule, setSchedule] = useState(initialSchedule)
@@ -130,15 +131,14 @@ export default function ApplyForm() {
               <Button
                 className="h-13 w-full text-base font-semibold"
                 disabled={!study.agree}
-                onClick={() => setSubmitted(true)}
+                onClick={() =>
+                  navigate('/payment', {
+                    state: { slotId: schedule.slotId, name: student.name },
+                  })
+                }
               >
                 검증 및 결제 단계로 이동 · {formatPrice(services.test.price)}
               </Button>
-              {submitted && (
-                <p className="mt-3 text-center text-sm text-primary">
-                  예약 정보가 확인되었습니다. (결제 단계는 준비 중입니다)
-                </p>
-              )}
             </div>
           </div>
         )}

@@ -20,6 +20,9 @@ dist-ssr
 # Claude tooling (copied design-stack skills)
 .claude/
 
+# Stitch temp design extraction artifacts (DESIGN.md is kept; designs/ is scratch)
+.stitch/designs/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
